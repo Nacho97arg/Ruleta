@@ -1,38 +1,42 @@
 import numpy as np
 import matplotlib.pyplot as mp
 
-print('Ingrese el numero de tiradas')
-numeroTiradas = int(input())
+class Ruleta:
 
-tiradas = np.random.randint(0,37,size = numeroTiradas)
-print(tiradas)
+    def __init__(self, nroTiradas):
+    	self.tiradas = []
+    	self.frecAbsolutas = []
+    	self.frecRelativas = []
+    	self.nroTiradas = nroTiradas
+    	for x in range(0,37):
+    		self.frecAbsolutas.append(0)
+    		self.frecRelativas.append(0)
+    	self.ejeX = []
+    	for x in range(0,37):
+    		self.ejeX.append(x)
 
-frecAbsolutas = []
-frecRelativas = []
+    def realizarTiradas(self):
+    	self.tiradas = np.random.randint(0,37,size = self.nroTiradas)
 
-for x in range(0,37):
-    frecAbsolutas.append(0)
-    frecRelativas.append(0)
+    def calcularFrecAbsoluta(self):
+    	for tirada in self.tiradas:
+    		self.frecAbsolutas[tirada] = self.frecAbsolutas[tirada]+1
 
-for tirada in tiradas:
-    frecAbsolutas[tirada] = frecAbsolutas[tirada]+1
-print(frecAbsolutas)
+    def calcularFrecRelativa(self):
+    	for x in range(0,37):
+    		self.frecRelativas[x]= self.frecAbsolutas[x]/self.nroTiradas
 
-for x in range(0,37):
-    frecRelativas[x]= frecAbsolutas[x]/numeroTiradas
+    def graficaFrecAbsoluta(self):
+    	self.calcularFrecAbsoluta()
+    	frecAbs = mp.subplot()
+    	frecAbs.bar(self.ejeX, self.frecAbsolutas)
+    	frecAbs.set_title('Frecuencias Absolutas')
+    	mp.show()
 
-frecAbs = mp.subplot()
-frecRel = mp.subplot()
-
-ejeX = []
-for x in range(0,37):
-    ejeX.append(x)
-
-frecAbs.bar(ejeX,frecAbsolutas)
-frecAbs.set_title('Frecuencias Absolutas')
-frecRel.bar(ejeX,frecRelativas)
-frecRel.set_title('Frecuencias Relativas')
-
-mp.show()
-
+    def graficaFrecRelativa(self):
+    	self.calcularFrecRelativa(self.nroTiradas)
+    	frecRel = mp.subplot()
+    	frecRel.bar(self.ejeX, self.frecRelativas)
+    	frecRel.set_title('Frecuencias Relativas')
+    	mp.show()
 
