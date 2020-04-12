@@ -6,19 +6,15 @@ numeroTiradas = int(input())
 ruleta = r.Ruleta(numeroTiradas)
 
 ruleta.realizarTiradas()
-#ruleta.calcularFrecAbsoluta()
-#ruleta.calcularFrecRelativa(numeroTiradas)
-
-
-print(ruleta.tiradas)
-print(ruleta.nroTiradas)
 
 input()
 
-ruleta.graficaFrecAbsoluta()
+ruleta.graficaPromedio()
 
 input()
 
-ruleta.graficaFrecRelativa()
+ruleta.graficaDesvio()
 
 input()
+
+ruleta.graficaVarianza()

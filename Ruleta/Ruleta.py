@@ -12,11 +12,20 @@ class Ruleta:
     		self.frecAbsolutas.append(0)
     		self.frecRelativas.append(0)
     	self.ejeX = []
-    	for x in range(0,37):
+    	for x in range(0, nroTiradas):
     		self.ejeX.append(x)
+    	self.promedios = []
+    	self.desvios = []
+    	self.varianzas = []
 
     def realizarTiradas(self):
-    	self.tiradas = np.random.randint(0,37,size = self.nroTiradas)
+    	for i in range(0, self.nroTiradas):
+    		nro = np.random.randint(0, 37)
+    		self.tiradas.append(nro)
+    		self.promedios.append(np.average(self.tiradas))
+    		self.desvios.append(np.std(self.tiradas))
+    		self.varianzas.append(np.var(self.tiradas))
+
 
     def calcularFrecAbsoluta(self):
     	for tirada in self.tiradas:
@@ -34,9 +43,20 @@ class Ruleta:
     	mp.show()
 
     def graficaFrecRelativa(self):
-    	self.calcularFrecRelativa(self.nroTiradas)
+    	self.calcularFrecRelativa()
     	frecRel = mp.subplot()
     	frecRel.bar(self.ejeX, self.frecRelativas)
     	frecRel.set_title('Frecuencias Relativas')
     	mp.show()
 
+    def graficaPromedio(self):
+    	mp.plot(self.promedios)
+    	mp.show()
+
+    def graficaDesvio(self):
+    	mp.plot(self.desvios)
+    	mp.show()
+
+    def graficaVarianza(self):
+    	mp.plot(self.varianzas)
+    	mp.show()
