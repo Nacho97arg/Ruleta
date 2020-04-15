@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>9387c5ae-a17a-433f-9bdc-bf53cbde483e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Ruleta.py</StartupFile>
+    <StartupFile>Ruleta 2.0.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,7 +22,10 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="class1.py">
+    <Compile Include="Inicio.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Ruleta 2.0.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Ruleta.py" />
