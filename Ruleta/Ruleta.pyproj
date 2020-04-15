@@ -22,13 +22,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Inicio.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Ruleta 2.0.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Ruleta.py" />
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="CondaEnv|CondaEnv|CondaEnv" />
