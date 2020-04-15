@@ -1,19 +1,54 @@
 import numpy as np
 import matplotlib.pyplot as matplot
 
+def plotGraficos(arregloFrecRel, arregloProm, arregloDesvEst, arregloVar, unico):
+    matplot.figure(figsize=(7,7))
+    if unico:
+        matplot.suptitle("Resultados de una iteracion")
+    if not(unico):
+        matplot.suptitle("Resultados Promedio de las iteraciones")
+
+    graf1=matplot.subplot(221,aspect='auto',anchor='N')
+    graf1.plot(frecRelativa[0],'tab:red')
+    graf1.axhline(frecRelEsperado,color='blue')
+    graf1.set_title("Frecuencia Relativa")
+
+    graf2=matplot.subplot(222,anchor='N')
+    graf2.plot(promedios[0], 'tab:purple')
+    graf2.axhline(promEsperado,color='blue')
+    graf2.set_title("Promedio")
+
+    graf3=matplot.subplot(223,anchor='S')
+    graf3.plot(desvioEstandar[0],'tab:blue')
+    graf3.axhline(desvEsperado,color='blue')
+    graf3.set_title("Desviacion Estandar")
+
+    graf4=matplot.subplot(224,anchor='S')
+    graf4.plot(variancia[0],'tab:orange')
+    graf4.axhline(varianEsperada,color='blue')
+    graf4.set_title("Variancia")
+    matplot.show()
+
+
 nroTiradas = int(input("Ingrese la cantidad de veces a iterar el experimento:\n"))
+
+
 nroSeguido = int(input("Ingrese el numero a seguir:\n"))
+if (nroSeguido>36 or nroSeguido<0):
+    print("El numero a seguir debe estar entre 0 y 36")
+while (nroSeguido<0 or nroSeguido>36):
+    nroSeguido = int(input("Numero ingresado invalido, ingrese un numero valido:\n"))
 
 print("Relizando experimento...\n")
 
 valores = np.arange(0, 37)
     
-frecRelEsperado = round(1/len(valores),4)             # Relative Frecuency Expected (1/37)
-promEsperado = round(np.mean(valores), 4)         # Average (Mean) Expected (666/37)
-varianEsperada = round(np.var(valores), 4)     # Variance Expected (114)
-desvEsperado = round(np.std(valores), 4)    # Deviation Expected (Square Root of 114)
+frecRelEsperado = round(1/len(valores),4)
+promEsperado = round(np.mean(valores), 4)
+varianEsperada = round(np.var(valores), 4)
+desvEsperado = round(np.std(valores), 4)
 
-nroDeRepeticiones = 5
+nroDeRepeticiones = 6
 
 frecRelativa=np.zeros((nroDeRepeticiones,nroTiradas+1))
 frecAbsoluta=np.zeros((nroDeRepeticiones,nroTiradas+1))
@@ -32,18 +67,13 @@ for n in range(nroDeRepeticiones):
         desvioEstandar[n][i]=np.std(valores)
         variancia[n][i]=np.var(valores)
 
+plotGraficos(frecRelativa[0], promedios[0],desvioEstandar[0], variancia[0], 1)
 
-matplot.figure()
-graf1=matplot.subplot(221,aspect='auto',anchor='C')
-graf1.plot(frecRelativa[0],'tab:red')
-graf1.axhline(frecRelEsperado,color='blue')
+frecRelProm = (frecRelativa[0] + frecRelativa[1] + frecRelativa[2] + frecRelativa[3] + frecRelativa[4] + frecRelativa[5]) / nroDeRepeticiones
+promedioProm = (promedios[0] + promedios[1] + promedios[2] + promedios[3] + promedios[4] + promedios[5]) / nroDeRepeticiones
+varianciaProm = (variancia[0] + variancia[1] + variancia[2] + variancia[3] + variancia[4] + variancia[5]) / nroDeRepeticiones
+desvioProm = (desvioEstandar[0] + desvioEstandar[1] + desvioEstandar[2] + desvioEstandar[3] + desvioEstandar[4] + desvioEstandar[5]) / nroDeRepeticiones
 
-graf2=matplot.subplot(222,anchor='C')
-graf2.plot(promedios[0], 'tab:purple')
+plotGraficos(frecRelProm,promedioProm,desvioProm,varianciaProm, 0)
 
-graf3=matplot.subplot(223,anchor='C')
-graf3.plot(desvioEstandar[0],'tab:blue')
 
-graf4=matplot.subplot(224,anchor='C')
-graf4.plot(variancia[0],'tab:orange')
-matplot.show()
