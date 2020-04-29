@@ -41,12 +41,12 @@ while (nroSeguido<0 or nroSeguido>36):
 
 print("Relizando experimento...\n")
 
-valores = np.arange(0, 37)
+valoresRuleta = np.arange(0, 37)
     
-frecRelEsperado = round(1/len(valores),4)
-promEsperado = round(np.mean(valores), 4)
-varianEsperada = round(np.var(valores), 4)
-desvEsperado = round(np.std(valores), 4)
+frecRelEsperado = round(1/len(valoresRuleta),4)
+promEsperado = round(np.mean(valoresRuleta), 4)
+varianEsperada = round(np.var(valoresRuleta), 4)
+desvEsperado = round(np.std(valoresRuleta), 4)
 
 nroDeRepeticiones = 6
 
